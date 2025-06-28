@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DuniaData Group | GIS CONGLOMERATE & Project Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(90deg, #2E7D32, #4CAF50);
+            color: white;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        header img {
+            width: 80px;
+            margin-right: 1rem;
+        }
+
+        header .header-text {
+            text-align: left;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #2E7D32;
+        }
+
+        .button {
+            background: #4CAF50;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .button:hover {
+            background: #388E3C;
+        }
+
+        .form-popup, .terms-popup, .founder-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .form-popup input,
+        .form-popup select,
+        .form-popup textarea {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-popup textarea {
+            resize: vertical;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #333;
+        }
+
+        .terms-popup h3, .founder-popup h3 {
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            background: #2E7D32;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .rating {
+            color: #FFD700;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            header img {
+                margin-bottom: 1rem;
+            }
+
+            .container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+        }
+    </style>
+    <script>
+        // Session-based email sharing
+        function saveEmail() {
+            const email = document.getElementById('form-email').value;
+            if (email) {
+                sessionStorage.setItem('userEmail', email);
+                alert('Email saved for this session. It will be included in your request.');
+            }
+        }
+
+        function openDivisionForm(division) {
+            document.getElementById('popup-form').style.display = 'block';
+            document.getElementById('form-division').value = division;
+            const savedEmail = sessionStorage.getItem('userEmail');
+            if (savedEmail) {
+                document.getElementById('form-email').value = savedEmail;
+            }
+        }
+
+        function sendFormToWhatsApp() {
+            const name = document.getElementById('form-name').value;
+            const email = document.getElementById('form-email').value;
+            const university = document.getElementById('form-university').value;
+            const message = document.getElementById('form-message').value;
+            const division = document.getElementById('form-division').value;
+
+            if (!name || !email || !university || !message) {
+                alert('Please fill out all fields.');
+                return;
+            }
+
+            sessionStorage.setItem('userEmail', email); // Save email to session
+            const encoded = encodeURIComponent(
+                `DuniaData Service Request\nDivision: ${division}\nName: ${name}\nEmail: ${email}\nUniversity/Organization: ${university}\nDetails: ${message}`
+            );
+            window.open(`https://wa.me/254101370035?text=${encoded}`, '_blank');
+            document.getElementById('popup-form').style.display = 'none';
+        }
+
+        function openTermsPopup() {
+            document.getElementById('terms-popup').style.display = 'block';
+        }
+
+        function openFounderPopup() {
+            document.getElementById('founder-popup').style.display = 'block';
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <img src="image.png" alt="DuniaData Logo">
+        <div class="header-text">
+            <h1>DuniaData Group – GIS & Project Solutions</h1>
+            <p>Your trusted partner for GIS, academic, and corporate project needs in Kenya</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h2>🎓 Campus GIS Projects</h2>
+            <p>Expert consultancy for GIS, ICT, and environmental science projects for students.</p>
+            <button class="button" onclick="openDivisionForm('Campus GIS Projects')">Request Campus Help</button>
+        </div>
+        <div class="card">
+            <h2>🧑‍🎓 Final Year GIS Projects</h2>
+            <p>Guidance and support for final year GIS projects with documentation and presentations.</p>
+            <button class="button" onclick="openDivisionForm('Final Year GIS Project')">Request FYP Support</button>
+        </div>
+        <div class="card">
+            <h2>🏢 Corporate GIS Solutions</h2>
+            <p>Enterprise GIS applications, dashboards, environmental reports, and mapping consultancy.</p>
+            <button class="button" onclick="openDivisionForm('Corporate GIS Projects')">Hire for Corporate Project</button>
+        </div>
+        <div class="card">
+            <h2>🛍️ GIS Project Sales</h2>
+            <p>Purchase ready-made GIS systems, map-based dashboards, or mobile mapping tools.</p>
+            <button class="button" onclick="openDivisionForm('GIS Project Sales')">Explore Ready-Made Projects</button>
+        </div>
+        <div class="card">
+            <h2>📚 GIS Project Catalogue</h2>
+            <p>Browse our catalog of previous GIS projects and request custom updates.</p>
+            <button class="button" onclick="openDivisionForm('Previous GIS Projects')">Request Similar Project</button>
+            <p><strong>💲 Price Range:</strong> $30 – $250 (Updated: June 2025)</p>
+        </div>
+        <div class="card">
+            <h2>⭐ Client Ratings</h2>
+            <p><span class="rating">★★★★☆</span> (4.5/5) - "Outstanding GIS support!"</p>
+            <p><span class="rating">★★★★★</span> (5/5) - "Delivered my GIS project on time!"</p>
+        </div>
+    </div>
+
+    <div class="form-popup" id="popup-form">
+        <span class="close-btn" onclick="document.getElementById('popup-form').style.display='none'">×</span>
+        <h2>Request a Service</h2>
+        <input type="hidden" id="form-division">
+        <input type="text" id="form-name" placeholder="Your Name" required>
+        <input type="email" id="form-email" placeholder="Your Email" required>
+        <select id="form-university" required>
+            <option value="" disabled selected>Select Your University/Organization</option>
+            <option value="University of Nairobi">University of Nairobi</option>
+            <option value="Kenyatta University">Kenyatta University</option>
+            <option value="Jomo Kenyatta University of Agriculture and Technology">Jomo Kenyatta University of Agriculture and Technology</option>
+            <option value="Moi University">Moi University</option>
+            <option value="Egerton University">Egerton University</option>
+            <option value="Maseno University">Maseno University</option>
+            <option value="Technical University of Kenya">Technical University of Kenya</option>
+            <option value="Strathmore University">Strathmore University</option>
+            <option value="Other">Other (Specify in Message)</option>
+        </select>
+        <textarea id="form-message" rows="5" placeholder="Describe your GIS project or request..." required></textarea>
+        <button class="button" onclick="saveEmail()">Save Email for Session</button>
+        <button class="button" onclick="sendFormToWhatsApp()">Submit via WhatsApp</button>
+    </div>
+
+    <div class="terms-popup" id="terms-popup">
+        <span class="close-btn" onclick="document.getElementById('terms-popup').style.display='none'">×</span>
+        <h3>Terms & Conditions</h3>
+        <p><strong>Service Requests:</strong> All requests are reviewed within 72 hours. DuniaData Group reserves the right to accept or reject requests based on authenticity, capacity, and compliance with ethical standards.</p>
+        <p><strong>Academic Integrity:</strong> Our services are intended for research support, consultancy, and guidance. Clients are responsible for ensuring their use of our services complies with their institution’s academic integrity policies. Submitting our work as your own may violate university rules.</p>
+        <p><strong>Data Privacy:</strong> Data submitted (e.g., name, email, university) is used solely for project support and service delivery, in compliance with Kenya’s Data Protection Act (2019). We do not share your data with third parties without consent.</p>
+        <p><strong>Intellectual Property:</strong> All delivered projects are licensed for personal or organizational use only. Reselling or redistributing our work without permission is prohibited.</p>
+        <!-- <p><strong>GIS Conglomerates in Kenya:</strong> We collaborate with leading GIS firms like <a href="https://www.esrikenya.com">Esri Kenya</a>, <a href="https://www.spatial.co.ke">Spatial Kenya</a>, and <a href="https://www.geosolutions.co.ke">GeoSolutions</a> to deliver cutting-edge GIS solutions.</p> -->
+        <p><strong>Liability:</strong> DuniaData Group is not liable for misuse of our services or deliverables. All prices are subject to change, and payments are non-refundable once work has commenced.</p>
+    </div>
+
+    <div class="founder-popup" id="founder-popup">
+        <span class="close-btn" onclick="document.getElementById('founder-popup').style.display='none'">×</span>
+        <h3>Founder Access</h3>
+        <p><strong>Chris & Kim:</strong> Access internal GIS tools, project analytics, and team dashboards here. Contact us for admin credentials.</p>
+    </div>
+
+    <footer>
+        <p>© 2025 DuniaData Group. All Rights Reserved.</p>
+        <p><a onclick="openTermsPopup()">View Terms & Conditions</a> | <a onclick="openFounderPopup()">Founder Access</a></p>
+        <p><a href="https://www.linkedin.com/in/dunia-data-14840a372/">Connect with us on LinkedIn</a></p>
+    </footer>
+</body>
+</html>
